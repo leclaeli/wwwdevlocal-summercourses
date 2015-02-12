@@ -1,6 +1,7 @@
 <?php
-add_image_size( 'home_thumb', 220, 220, array('center','center') ); // (cropped)
+add_image_size( 'home_thumb', 230, 230, array('center','center') ); // (cropped)
 add_image_size( 'home_crop', 1800, 450, array('center','top') ); // (cropped)
+add_image_size( 'home_featured_img', 520, 320, array('center','top') ); // (cropped)
 
 function rotate_resize( $payload, $orig_w, $orig_h, $dest_w, $dest_h, $crop ) {
 	if( false )
@@ -109,15 +110,15 @@ function MyAjaxFunction(){
 		
 		while ( $the_query->have_posts() ) {
 			$the_query->the_post();
-			echo '<h3>' . get_the_title() . '</h4>';
+			echo '<h3>' . get_the_title() . '</h3>'; ?>
+			<p><?php the_field( 'course_number_section' ); ?></p>
+			<?php
 			// echo '<p>' . get_the_content() . '</p>';
-			echo '<ul><li>';
-			the_field( 'course_number_section' );
-			echo '</li><li>'; 
+			echo '<ul><li><b>Class Number: </b>'; 
 			the_field( 'class_number' );
-			echo '</li><li>'; 
+			echo '</li><li><b>Credits: </b>'; 
 			the_field( 'number_of_credits' );
-			echo '</li><li>'; 
+			echo '</li><li><b>Instructor: </b>'; 
 			the_field( 'instructor' );
 			echo '</li></ul>';
 		}
@@ -173,3 +174,28 @@ function add_custom_types_to_tax( $query ) {
 }
 add_filter( 'pre_get_posts', 'add_custom_types_to_tax' );
 
+/* show plugins */
+function showPlugins() {
+	// Check if get_plugins() function exists. This is required on the front end of the
+	// site, since it is in a file that is normally only loaded in the admin.
+	if ( ! function_exists( 'get_plugins' ) ) {
+		require_once ABSPATH . 'wp-admin/includes/plugin.php';
+	}
+
+	$all_plugins = get_plugins();
+	$all_plugins_keys = array_keys($all_plugins);
+
+	$loopCtr = 0;
+	echo "<table>";
+	foreach ($all_plugins as $plugin_item) {
+
+	     // Get our Plugin data variables
+	     $plugin_root_file   = $all_plugins_keys[$loopCtr];
+	     $plugin_title       = $plugin_item['Title'];
+	     $plugin_version     = $plugin_item['Version'];
+	     $plugin_status      = is_plugin_active($plugin_root_file) ? 'active' : 'inactive';
+		echo '<tr><td>' .$plugin_title . '</td><td>' . $plugin_version . '</td><td>' . $plugin_status .'</td></tr>';
+		$loopCtr++;
+	}
+	echo "</table>";
+}

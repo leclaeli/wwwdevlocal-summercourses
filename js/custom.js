@@ -1,12 +1,19 @@
 jQuery(document).ready(function($) {
-    
+        
     var $h = $('#slideout-hover'),
         hoverWidth = $h.width();
         $h.hide();
+
     var cache = {}; //our cache object
-    $('#courses li').hover(function(event) {
+    $('#courses li, .sub-featured-course').hover(function(event) {
         /* Stuff to do when the mouse enters the element */
         var $tgt = $(this),
+            // thisWidth = $tgt.width();
+            // if ( thisWidth > 300 ) { 
+            //     hoverWidth = 316; 
+            // } else {
+            //     hoverWidth = 235;
+            // }
             $root = $(':root'),
             tgtPos = $tgt.offset(), // top left corner of tgt position (need to get to top right)
             rootPos = $root.offset(),
@@ -28,7 +35,7 @@ jQuery(document).ready(function($) {
         var handle = $(this).find('span').html(); //davidwalshblog, for example
         var cacheHandle = handle.toLowerCase();
         if(cache[cacheHandle] != undefined) {
-            $(".hoverDetailsContent").html(cache[cacheHandle]);
+            $(".hover-details-content").html(cache[cacheHandle]);
             //console.log(cache);
         }
         else {
@@ -40,8 +47,8 @@ jQuery(document).ready(function($) {
                     id: theId,
                 },
                 success: function(data, textStatus, XMLHttpRequest){
-                    $(".hoverDetailsContent").html('');
-                    $(".hoverDetailsContent").append(data);
+                    $(".hover-details-content").html('');
+                    $(".hover-details-content").append(data);
                     cache[cacheHandle] = (data);
                     console.log(cache);
                 },
@@ -53,7 +60,8 @@ jQuery(document).ready(function($) {
         }
 
 
-    $('#slideout-hover').stop().show().css(css).animate({width: hoverWidth}, 225);
+    $('#slideout-hover').stop().show().css(css).animate({ width: hoverWidth }, 225);
+    console.log(hoverWidth);
         
     }, function() {
         /* Stuff to do when the mouse leaves the element */
@@ -71,11 +79,7 @@ jQuery(document).ready(function($) {
         //$(el).addClass('opacity-zero');
     });
 
-
-
         $('#featured-slider ul li').eq(0).addClass('opacity-one');
-
-
     $i = 0;
 
     var slides = $('#featured-slider ul li');
@@ -105,5 +109,14 @@ jQuery(document).ready(function($) {
     }
 
     rotateTimer();
-                
+
+    /* Set min height on .sub-featured-course h4 */
+
+    elHeights = [];
+    $('.sub-featured-course h4').each(function(index, el) {
+        elHeights[index] = $(el).height();
+        tallest = Math.max.apply(Math, elHeights);
+    });
+    $('.sub-featured-course h4').height(tallest);
+
 });
