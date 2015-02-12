@@ -35,7 +35,7 @@ get_header(); ?>
 		if ( $c == 1 ) { ?>
 			<div id="top-container" class="content-area">
 				<div id="top-content">
-					<div id="featured-slider">
+					<div id="featured-image">
 						<?php if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned to it.
 						?>	
 						<a href='<?php the_permalink(); ?>'>
