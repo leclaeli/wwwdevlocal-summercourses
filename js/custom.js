@@ -74,27 +74,28 @@ jQuery(document).ready(function($) {
     */
 
     var sliderIndex;
-    $( '#featured-slider ul li' ).each( function( index, el ) {
+    var slides = ('#featured-slider > ul > li')
+    $( slides ).each( function( index, el ) {
         console.log( index );
         //$(el).addClass('opacity-zero');
     });
 
-        $('#featured-slider ul li').eq(0).addClass('opacity-one');
+        $(slides).eq(0).addClass('opacity-one');
     $i = 0;
 
-    var slides = $('#featured-slider ul li');
+    var slides = $(slides);
 
     function rotate() {
         var currentIndex = $('.opacity-one').index();
-        $('#featured-slider ul li').eq(currentIndex).removeClass('opacity-one');
+        $(slides).eq(currentIndex).removeClass('opacity-one');
         currentIndex++
-        if ( currentIndex > 4 ) {
+        if ( currentIndex > 3 ) {
             currentIndex = 0;
         }
-        $('#featured-slider ul li').eq(currentIndex).addClass('opacity-one');
+        $(slides).eq(currentIndex).addClass('opacity-one');
     }
 
-    $('#featured-slider ul li').hover(function() {
+    $(slides).hover(function() {
         clearInterval(timer);
     }, function() {
         rotateTimer();
@@ -112,11 +113,11 @@ jQuery(document).ready(function($) {
 
     /* Set min height on .sub-featured-course h4 */
 
-    elHeights = [];
-    $('.sub-featured-course h4').each(function(index, el) {
-        elHeights[index] = $(el).height();
-        tallest = Math.max.apply(Math, elHeights);
-    });
-    $('.sub-featured-course h4').height(tallest);
+    // elHeights = [];
+    // $('.sub-featured-course h4').each(function(index, el) {
+    //     elHeights[index] = $(el).height();
+    //     tallest = Math.max.apply(Math, elHeights);
+    // });
+    // $('.sub-featured-course h4').height(tallest);
 
 });

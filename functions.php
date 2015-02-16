@@ -1,7 +1,7 @@
 <?php
 add_image_size( 'home_thumb', 230, 230, array('center','center') ); // (cropped)
 add_image_size( 'home_crop', 1800, 450, array('center','top') ); // (cropped)
-add_image_size( 'home_featured_img', 520, 320, array('center','top') ); // (cropped)
+add_image_size( 'home_featured_img', 650, 400, array('center','top') ); // (cropped)
 
 function rotate_resize( $payload, $orig_w, $orig_h, $dest_w, $dest_h, $crop ) {
 	if( false )
