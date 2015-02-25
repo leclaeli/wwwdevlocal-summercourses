@@ -5,7 +5,7 @@ jQuery(document).ready(function($) {
         $h.hide();
 
     var cache = {}; //our cache object
-    $('#courses li, .sub-featured-course').hover(function(event) {
+    $('#courses li').hover(function(event) {
         /* Stuff to do when the mouse enters the element */
         var $tgt = $(this),
             // thisWidth = $tgt.width();
@@ -32,7 +32,7 @@ jQuery(document).ready(function($) {
 
         // Ajax call 
         var theId = $(this).attr("id");
-        var handle = $(this).find('span').html(); //davidwalshblog, for example
+        var handle = $(this).find('#course-title').html(); //davidwalshblog, for example
         var cacheHandle = handle.toLowerCase();
         if(cache[cacheHandle] != undefined) {
             $(".hover-details-content").html(cache[cacheHandle]);
@@ -61,11 +61,15 @@ jQuery(document).ready(function($) {
 
 
     $('#slideout-hover').stop().show().css(css).animate({ width: hoverWidth }, 225);
-    console.log(hoverWidth);
+    $($tgt).find('#center-link').stop().fadeIn(225);
+    //$($tgt).find('> a').stop().animate({opacity: .25}, 225);
         
     }, function() {
+        var $tgt = $(this);
         /* Stuff to do when the mouse leaves the element */
         $('#slideout-hover').stop().animate({width: 0}, 225, function(){ $('#slideout-hover').hide(); });
+        $($tgt).find('#center-link').stop().fadeOut(225);
+        //$($tgt).find('> a').stop().animate({opacity: 1}, 225);
     });
 
 
@@ -75,27 +79,31 @@ jQuery(document).ready(function($) {
 
     var sliderIndex;
     var slides = ('#featured-slider > ul > li')
-    $( slides ).each( function( index, el ) {
-        console.log( index );
-        //$(el).addClass('opacity-zero');
-    });
 
-        $(slides).eq(0).addClass('opacity-one');
+    $(slides).eq(0).addClass('opacity-one');
     $i = 0;
 
     var slides = $(slides);
 
-    function rotate() {
+    function rotate(newIndex) {
         var currentIndex = $('.opacity-one').index();
         $(slides).eq(currentIndex).removeClass('opacity-one');
-        currentIndex++
-        if ( currentIndex > 3 ) {
-            currentIndex = 0;
+        if ( newIndex === undefined ) {
+            currentIndex++
+            if ( currentIndex > 3 ) {
+                currentIndex = 0;
+            }
+        } else {
+            currentIndex += newIndex;
+            if ( currentIndex > 3 ) {
+                currentIndex = 0;
+            }
         }
+        console.log(currentIndex);
         $(slides).eq(currentIndex).addClass('opacity-one');
     }
 
-    $(slides).hover(function() {
+    $('#featured-slider').hover(function() {
         clearInterval(timer);
     }, function() {
         rotateTimer();
@@ -103,11 +111,21 @@ jQuery(document).ready(function($) {
     
     function rotateTimer() {
         timer = setInterval( function() {
-        rotate();
-        }, 
-        5000  
-    );
+            rotate();
+            }, 
+            5000  
+        );
     }
+
+    $('#previous').click(function(event) {
+        /* Act on the event */
+        rotate(-1);
+    });
+
+    $('#next').click(function(event) {
+        /* Act on the event */
+        rotate(1);
+    });
 
     rotateTimer();
 
