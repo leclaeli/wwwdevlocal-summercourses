@@ -41,7 +41,7 @@
 		</footer><!-- #colophon -->
 	</div><!-- #page -->
 	<div id="slideout-hover">
-		<div class="hoverDetailsContent">
+		<div class="hover-details-content">
 		</div>
 	</div>
 		
