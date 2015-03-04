@@ -108,6 +108,7 @@ Version:        0.1
 	margin-right: -100%;
 	opacity: 0;
 	width: 100%;
+	z-index: 0
 }
 
 #featured-slider li a {
@@ -155,6 +156,7 @@ Version:        0.1
 	-ms-transition: all 1.25s ease;
 	-o-transition: all 1.25s ease;
 	transition: all 1.25s ease;
+	z-index: 1;
 }
 
 #featured-slider li img {
@@ -303,11 +305,54 @@ Version:        0.1
 }
 
 #sub-top-container #sub-top-content {
-	margin-top: 30px;
-	margin-bottom: 30px;
+	margin-top: 40px;
 }
 
-.sub-featured-course {
+#sub-top-content .two_third {
+	padding-right: 20px;
+} 
+
+#sub-top-content .one_third.last_column {
+	background-attachment: scroll, scroll;
+	background-blend-mode: unset;
+	background-color: rgba(0, 0, 0, 0.4);
+	background-color: #f1f1f1;
+	/*background-image: url("images/Summer-Beach-Sun-27.jpg"), none;*/
+	background-origin: padding-box, padding-box;
+	background-position: 0 0%, 0 0;
+	background-repeat: repeat, repeat;
+	background-size: 350px auto;
+	border-radius: 4px;
+	color: #000;
+}
+
+#sub-top-content .one_third.last_column h3 {
+	background: none repeat scroll 0 0 #98c646;
+	border-radius: 4px 4px 0 0;
+	padding: 10px 20px;
+}
+
+#sub-top-content .one_third.last_column h3:before {
+	content: "";
+	font: 23px/1 FontAwesome;
+	padding-right: 10px;
+}
+
+#sub-top-content .one_third.last_column p {
+	margin: 20px 20px;
+}
+
+#sub-top-content .one_third.last_column p:first-of-type {
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 20px;
+}
+
+#sub-top-content .one_third.last_column a {
+	/*color: #ccc;*/
+}
+
+
+/*.sub-featured-course {
 	float: left;
 	width: 32%;
 	position: relative;
@@ -315,7 +360,6 @@ Version:        0.1
 }
 
 .sub-featured-course img {
-	/*border: 1px solid #a4a4a4;*/
 }
 
 .sub-featured-course:first-of-type {
@@ -337,7 +381,7 @@ Version:        0.1
 	color: #98c646;
 	font-weight: 400;
 	text-shadow: 1px 1px 0 rgba(0, 0, 0, 1);
-}
+}*/
 
 /* courses container */
 
@@ -452,7 +496,7 @@ Version:        0.1
 	background: none repeat scroll 0 0 rgba(93%, 93%, 93%, 0.92);
 	height: 222px;
 	position: relative;
-	width: 235px;
+	width: 246px;
 }
 
 #slideout-hover h3 {
@@ -465,6 +509,7 @@ Version:        0.1
 .hover-details-content p {
 	padding: 15px;
 	margin: 0;
+	font-size: 13px;
 }
 
 .hover-details-content ul {

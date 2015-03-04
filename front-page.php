@@ -19,7 +19,7 @@ get_header(); ?>
         $featured_args = array(
             //Type & Status Parameters
             'post_type'         => 'cpt-courses',
-            'cat'               => 5,
+            'category_name'     => 'featured',
             'posts_per_page'    => 4,
             'orderby'           => 'rand',
         );
@@ -62,7 +62,7 @@ get_header(); ?>
                                 echo '<h3>' . get_the_title() . '</h3>'; ?>
                                 
                                 <?php
-                                echo '<p id="course-description">' . get_the_content() . '</p>';
+                                echo '<p id="course-description">' . get_the_excerpt() . '</p>';
                                 ?>
                                 <div id="course-details">
                                     <p id="course-number"><?php the_field( 'course_number_section' ); ?></p>
@@ -103,26 +103,26 @@ get_header(); ?>
         
             <div id="sub-top-container" class="content-area">
                 <div id="sub-top-content">
+                    <div id="primary" class="site-content" role="main">
+                        <?php /* The loop */ ?>
+                        <?php while ( have_posts() ) : the_post(); ?>
+                        
+                            <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+                            
+                                <?php get_sidebar( 'front-page-banner' ); ?>
+                            
+                                <div class="entry-content">
+                                    
+                                    <?php wp_reset_query(); the_content(); ?>
+                                    
+                                </div><!-- .entry-content -->
+
+                            </article><!-- #post -->
+                            
+                        <?php endwhile; ?>
+
+                    </div><!-- #primary -->
                 </div>
-                <div id="primary" class="site-content" role="main">
-                    <?php /* The loop */ ?>
-                    <?php while ( have_posts() ) : the_post(); ?>
-                    
-                        <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-                        
-                            <?php get_sidebar( 'front-page-banner' ); ?>
-                        
-                            <div class="entry-content">
-                                
-                                <?php wp_reset_query(); the_content(); ?>
-                                
-                            </div><!-- .entry-content -->
-
-                        </article><!-- #post -->
-                        
-                    <?php endwhile; ?>
-
-                </div><!-- #primary -->
             </div>
 
 
@@ -162,6 +162,7 @@ get_header(); ?>
                             <?php the_post_thumbnail('home_thumb'); ?>
                             <div id="center-link">
                                 <i class="fa fa-link"></i>
+                                <p>Learn More</p>
                             </div>
                         </a>
                             <div id="course-title"><a href='<?php the_permalink(); ?>'><?php the_title(); ?></a></div>
