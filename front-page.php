@@ -128,7 +128,7 @@ get_header(); ?>
 
     <div id="courses-container" class="content-area">
         <div id="courses-content">
-        <h2>Browse Featured Courses</h2>
+        <h2 id="browse">Browse Featured Courses</h2>
         <?php
             $args = array(
                 //Type & Status Parameters

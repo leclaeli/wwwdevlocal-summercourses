@@ -160,6 +160,7 @@ Version:        0.1
 }
 
 #featured-slider li img {
+	max-width: none;
 }
 
 #course-caption {
@@ -212,6 +213,7 @@ Version:        0.1
 	left: 20px;
 	bottom: 20px;
 	z-index: 10;
+	width: 100px;
 }
 
 #course-link a {
@@ -316,7 +318,7 @@ Version:        0.1
 	background-attachment: scroll, scroll;
 	background-blend-mode: unset;
 	background-color: rgba(0, 0, 0, 0.4);
-	background-color: #f1f1f1;
+	background-color: #f8f8f8;
 	/*background-image: url("images/Summer-Beach-Sun-27.jpg"), none;*/
 	background-origin: padding-box, padding-box;
 	background-position: 0 0%, 0 0;
@@ -330,6 +332,7 @@ Version:        0.1
 	background: none repeat scroll 0 0 #98c646;
 	border-radius: 4px 4px 0 0;
 	padding: 10px 20px;
+	margin: 0;
 }
 
 #sub-top-content .one_third.last_column h3:before {
@@ -518,6 +521,28 @@ Version:        0.1
 	list-style: none;
 	font-size: 14px;
 }
+
+/*
+** Sidebars & Widget Area
+*/
+
+.sidebar-container .widget {
+	background-color: #f8f8f8;
+	padding: 20px;
+	border: 1px solid rgba(0, 0, 0, 0.05);
+	border-radius: 4px;
+}
+
+.widget .widget-title {
+	background: none repeat scroll 0 0 #98c646;
+	border-radius: 4px 4px 0 0;
+	margin: -20px -21px 20px;
+	padding: 14px 20px;
+}
+
+
+
+
 
 
 /*
@@ -730,6 +755,32 @@ Version:        0.1
 	#featured-slider #slider-content {
 		left: 5%;
 		width: 90%;
+	}
+
+	#course-link {
+		bottom: 20px;
+		left: 50%;
+		margin-left: -50px;
+		text-align: center;
+		width: 100px;
+		z-index: 11;
+	}
+
+	#slide-controls {
+		width: 100%;
+		left: 0;
+		pointer-events: none;
+	}
+
+	#slide-controls #previous {
+		padding-left: 30px;
+		pointer-events: auto;
+	}
+
+	#slide-controls #next {
+		float: right;
+		padding-right: 30px;
+		pointer-events: auto;
 	}
 }
 

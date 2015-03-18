@@ -7,7 +7,7 @@ add_action( 'after_setup_theme', 'my_child_theme_setup' );
 function my_child_theme_setup() {
 	//customize excerpt length
 	function wtmj_excerpt_length( $length ) {
-		return 25;
+		return 22;
 	}
 	add_filter( 'excerpt_length', 'wtmj_excerpt_length', 999 );
 	
@@ -317,7 +317,7 @@ function create_course_from_submission($entry, $form) {
 		$attach_data = wp_generate_attachment_metadata( $attach_id, $filename );
 		wp_update_attachment_metadata( $attach_id, $attach_data );
 
-		update_field('course_syllabus', $attach_id, $post_id); // Course Syllabus
+		update_field('field_54f0eda5a8693', $attach_id, $post_id); // Course Syllabus
 	}
 }
 

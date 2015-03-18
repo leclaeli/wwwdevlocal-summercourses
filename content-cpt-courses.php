@@ -18,11 +18,8 @@
 			<a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a>
 		</h1>
 		<?php endif; // is_single() ?>
-		
-		<div class="entry-meta">
-			<?php twentythirteen_entry_meta(); ?>
-			<?php edit_post_link( __( 'Edit', 'twentythirteen' ), '<span class="edit-link">', '</span>' ); ?>
-		</div><!-- .entry-meta -->
+	
+	<!-- deleted .entry-meta -->
 		
 		<?php if ( has_post_thumbnail() && ! post_password_required() ) : ?>
 		<div class="entry-thumbnail">
@@ -48,16 +45,38 @@
 	<?php else : ?>
 		<div class="entry-content">
 			<h4><?php the_field( 'course_number_section' ); ?></h4>
-			<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'twentythirteen' ) ); ?>			
-				<?php 
-				echo '<ul><li><b>Class Number:</b> '; 
-				the_field( 'class_number' );
-				echo '</li><li><b>Credits:</b> '; 
-				the_field( 'number_of_credits' );
-				echo '</li><li><b>Instructor:</b> '; 
-				the_field( 'instructor' );
-				echo '</li></ul>';
-				?>
+			
+			<?php 
+			echo '<ul><li><b>Class Number:</b> '; 
+			the_field( 'class_number' );
+			echo '</li><li><b>Credits:</b> '; 
+			the_field( 'number_of_credits' );
+			echo '</li><li><b>Instructor:</b> '; 
+			the_field( 'instructor' );
+			if( get_field('start_date') ):
+				echo '</li><li><b>Dates:</b> ';
+			/*
+			*  Create PHP DateTime object from Date Piker Value
+			*  this example expects the value to be saved in the format: yymmdd (JS) = Ymd (PHP)
+			*/
+				$date = DateTime::createFromFormat('Y-m-d', get_field('start_date'));
+				echo $date->format('m/d/y');
+				echo '–';
+				$date = DateTime::createFromFormat('Y-m-d', get_field('end_date'));
+				echo $date->format('m/d/y');
+			endif;
+			if( get_field('course_syllabus') ):
+				$file = get_field('course_syllabus');
+				echo "</li><li><a href='$file[url]' target='_blank'>Course Syllabus (.pdf)</a>";
+			endif;
+			echo '</li></ul>';
+			
+			// echo $file['url'];
+			// // view array of data
+			// var_dump($file);
+			?>
+
+			<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'twentythirteen' ) ); ?>
 		</div>
 			<?php wp_link_pages( array( 'before' => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'twentythirteen' ) . '</span>', 'after' => '</div>', 'link_before' => '<span>', 'link_after' => '</span>' ) ); ?>
 	<?php endif; ?>
