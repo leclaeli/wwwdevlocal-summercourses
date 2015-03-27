@@ -2,6 +2,7 @@
 /**
  * shoe-horning custom_excerpt length and such into child theme
  */
+
 add_action( 'after_setup_theme', 'my_child_theme_setup' );
 
 function my_child_theme_setup() {
@@ -21,6 +22,7 @@ function my_child_theme_setup() {
 /**
  * Add custom image sizes.
  */
+
 add_image_size( 'home_thumb', 230, 230, array('center','center') ); // (cropped)
 add_image_size( 'home_featured_img', 650, 400, array('center','top') ); // (cropped)
 
@@ -28,8 +30,6 @@ function rotate_resize( $payload, $orig_w, $orig_h, $dest_w, $dest_h, $crop ) {
 	if( false )
 		return $payload;
 	if ( $crop ) {
-		// $min_w = min($dest_w, $orig_w);
-		// $min_h = min($dest_h, $orig_h);
 			if ($dest_w === 650 ) {
 				//	print_r($orig_w);
 				$src_h = $orig_w / 1.625;
@@ -104,7 +104,10 @@ add_filter( 'image_resize_dimensions', 'rotate_resize', 10, 6 );
 
 
 
-/* Enqueue Scripts/Styles */
+/**
+ * Enqueue Scripts/Styles
+ */ 
+
 function custom_js_script() {
 	wp_enqueue_script('custom-script', get_stylesheet_directory_uri() . '/js/custom.js', array( 'jquery'), false, false);
 	wp_enqueue_script('jquery-effects-core');
@@ -117,7 +120,10 @@ function custom_js_script() {
 add_action('wp_enqueue_scripts', 'custom_js_script');
 
 
-/* Ajax Functions */
+/* 
+ * Ajax Functions 
+ */
+
 function MyAjaxFunction(){
 	//get the data from ajax() call_user_func(function)
 	$id = $_POST['id'];
@@ -165,7 +171,10 @@ function MyAjaxFunction(){
  add_action( 'wp_ajax_MyAjaxFunction', 'MyAjaxFunction' );
 
 
-/* Register Custom Post Types */
+/* 
+ * Register Custom Post Types 
+*/
+
 function codex_custom_posts_init() {
 		$args_courses = array(
 	      'public' => true,
@@ -184,8 +193,7 @@ function codex_custom_posts_init() {
 
 add_action( 'init', 'codex_custom_posts_init' );
 
-
-/* Add custom post types to taxonomy pages */
+// Add custom post types to taxonomy pages */
 function add_custom_types_to_tax( $query ) {
     if( is_category() || is_tag() && empty( $query->query_vars['suppress_filters'] ) ) {
 
@@ -214,17 +222,13 @@ function create_course_from_submission($entry, $form) {
 	//From creating it, we now have its ID
 	$post_id = wp_insert_post($new_course);
 	//Now we add the meta
-	//$thePrefix = '_sitemeta_';
-	// update_post_meta($theId, $thePrefix.'colour', ucwords($entry[1]));
-	// update_post_meta($theId, $thePrefix.'personality', ucwords($entry[2]));
-	// update_post_meta($theId, $thePrefix.'smell', ucwords($entry[3]));
 	update_field('field_54bfbf110f93c', $entry['2'], $post_id); // Course # and Section
 	update_field('field_54bfbf9c0f93d', $entry['7'], $post_id); // Class #
 	update_field('field_54bfbff20f93e', $entry['6'], $post_id); // Number of credits
 	update_field('field_54bfc01c0f93f', $entry['4'], $post_id); // Instructor
 	update_field('field_54f0de30ac21e', $entry['5'], $post_id); // Start date
 	update_field('field_54f0de54ac21f', $entry['8'], $post_id); // End date
-	// Update post 37
+
 	$my_post = array(
 	  'ID'           => $post_id,
 	  'post_content' => $entry['11']
@@ -232,8 +236,7 @@ function create_course_from_submission($entry, $form) {
 	// Update the post into the database
 	wp_update_post( $my_post );
 
-
-
+	// Add image to media library from form upload
 	if(!empty($entry['9'])) {
 		// $filename should be the path (not url) to a file in the upload directory.
 		$file_url = $entry['9']; //great but what is its url?

@@ -785,10 +785,11 @@ Version:        0.1
 	}
 
 	#course-link a {
-		background: none repeat scroll 0 0 #333;
+		background: none repeat scroll 0 0 rgba(51, 51, 51, 0.75);
 		border-radius: 0;
 		border-right: 4px solid #98c646;
 		padding: 8px 10px;
+		color: #ccc;
 	}
 
 	#slide-controls {
@@ -807,6 +808,18 @@ Version:        0.1
 		float: right;
 		padding-right: 30px;
 		pointer-events: auto;
+	}
+}
+
+/* For hover on mobile */
+@media (max-width: 515px) {
+	.hover-details-content {
+		width: 222px;
+		height: auto;
+	}
+
+	#slideout-hover h3 {
+		width: 222px;
 	}
 }
 
