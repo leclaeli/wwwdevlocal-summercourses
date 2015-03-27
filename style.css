@@ -78,8 +78,6 @@ Version:        0.1
 #featured-slider {
 	max-width: 1060px;
 	margin: 0 auto;
-	background-image: url('images/gradient.png');
-	background-position: left;
 }
 
 #featured-slider > ul {
@@ -213,7 +211,6 @@ Version:        0.1
 	left: 20px;
 	bottom: 20px;
 	z-index: 10;
-	width: 100px;
 }
 
 #course-link a {
@@ -607,7 +604,7 @@ Version:        0.1
 	#sub-top-content,
 	#courses-content {
 		max-width: 960px;
-		padding: 0 20px;
+		padding: 0 10px;
 	}
 
 	/* Slider */
@@ -649,7 +646,6 @@ Version:        0.1
 @media (max-width: 767px) {
 	#top-container {
 		height: auto;
-		max-height: none;
 	}
 
 	#course-summary {
@@ -668,9 +664,6 @@ Version:        0.1
 		font-size: 14px;
 		font-weight: 300;
 		margin: 0;
-	}
-
-	#course-details {
 	}
 
 	#course-details ul {
@@ -752,24 +745,57 @@ Version:        0.1
 }
 
 @media (max-width: 643px) {
+	#top-container {
+		max-height: none;
+	}
+
 	#featured-slider #slider-content {
-		left: 5%;
-		width: 90%;
+		left: 0;
+		width: 100%;
+		height: auto;
+		position: relative;
+		top: 0;
+	}
+
+	#featured-slider #slider-image {
+		float: none;
+	}
+
+	#featured-slider li img {
+		max-width: 100%;
+	}
+
+	#featured-slider #gradient-left {
+		display: none;
+	}
+
+	#course-summary {
+		padding: 20px;
+	}
+
+	#course-details {
+		display: none;
 	}
 
 	#course-link {
-		bottom: 20px;
-		left: 50%;
-		margin-left: -50px;
-		text-align: center;
-		width: 100px;
-		z-index: 11;
+	    top: -40px;
+	    z-index: 11;
+	    left: auto;
+	    right: 0;
+	}
+
+	#course-link a {
+		background: none repeat scroll 0 0 #333;
+		border-radius: 0;
+		border-right: 4px solid #98c646;
+		padding: 8px 10px;
 	}
 
 	#slide-controls {
 		width: 100%;
 		left: 0;
 		pointer-events: none;
+		display: none;
 	}
 
 	#slide-controls #previous {

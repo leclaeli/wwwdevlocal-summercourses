@@ -31,10 +31,10 @@ get_header(); ?>
         <div id="top-container" class="content-area">
             <div id="featured-slider">
                 <ul>
-            <?php while ( $the_query->have_posts() ) { ?>
-            <?php
-            $the_query->the_post();
-            ?>
+                <?php while ( $the_query->have_posts() ) { ?>
+                <?php
+                $the_query->the_post();
+                ?>
                     <li>
                         <div id="slider-background">
                             <?php if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned to it.
@@ -90,7 +90,8 @@ get_header(); ?>
                     <div id="next">next</div>
                 </div>
             </div>
-                <?php
+            <div class="clear"></div>
+    <?php
     } else {
         // no posts
     } // end if have_posts()

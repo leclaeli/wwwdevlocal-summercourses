@@ -99,8 +99,8 @@ jQuery(document).ready(function($) {
                 currentIndex = 0;
             }
         }
-        console.log(currentIndex);
         $(slides).eq(currentIndex).addClass('opacity-one');
+        adjustHeight(750);
     }
 
     $('#featured-slider').hover(function() {
@@ -113,8 +113,15 @@ jQuery(document).ready(function($) {
         timer = setInterval( function() {
             rotate();
             }, 
-            5000  
+            6000  
         );
+    }
+
+    function adjustHeight(newSpeed) {
+        var newHeight = $('.opacity-one #slider-background').height() + $('.opacity-one #slider-content').height();
+        $('#top-container').animate({
+            height: newHeight
+        }, newSpeed);
     }
 
     $('#previous').click(function(event) {
@@ -128,6 +135,7 @@ jQuery(document).ready(function($) {
     });
 
     rotateTimer();
+    adjustHeight(0);
 
     /* Set min height on .sub-featured-course h4 */
 

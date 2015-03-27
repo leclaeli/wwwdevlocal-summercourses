@@ -22,7 +22,6 @@ function my_child_theme_setup() {
  * Add custom image sizes.
  */
 add_image_size( 'home_thumb', 230, 230, array('center','center') ); // (cropped)
-add_image_size( 'home_crop', 1800, 450, array('center','top') ); // (cropped)
 add_image_size( 'home_featured_img', 650, 400, array('center','top') ); // (cropped)
 
 function rotate_resize( $payload, $orig_w, $orig_h, $dest_w, $dest_h, $crop ) {
@@ -31,9 +30,9 @@ function rotate_resize( $payload, $orig_w, $orig_h, $dest_w, $dest_h, $crop ) {
 	if ( $crop ) {
 		// $min_w = min($dest_w, $orig_w);
 		// $min_h = min($dest_h, $orig_h);
-			if ($dest_w === 1800 ) {
+			if ($dest_w === 650 ) {
 				//	print_r($orig_w);
-				$src_h = $orig_w / 4;
+				$src_h = $orig_w / 1.625;
 				$src_y = ( $orig_h / 2 ) - ( $src_h / 2 );
 				$dst_w = $dest_w;
 				$dst_h = $dest_h;
