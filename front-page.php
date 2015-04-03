@@ -20,7 +20,6 @@ get_header(); ?>
             //Type & Status Parameters
             'post_type'         => 'cpt-courses',
             'category_name'     => 'featured',
-            'posts_per_page'    => 4,
             'orderby'           => 'rand',
         );
 
@@ -133,7 +132,10 @@ get_header(); ?>
         <?php
             $args = array(
                 //Type & Status Parameters
-                'post_type'   => 'cpt-courses',
+                'post_type'         => 'cpt-courses',
+                'posts_per_page'    => -1,
+                'order'             => 'ASC',
+                'orderby'           => 'name',
             );
             $the_query = new WP_Query( $args );
             // The Loop

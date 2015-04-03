@@ -78,6 +78,10 @@ Version:        0.1
 #featured-slider {
 	max-width: 1060px;
 	margin: 0 auto;
+	-webkit-font-smoothing: antialiased;
+	font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-weight: 500;
 }
 
 #featured-slider > ul {
@@ -106,7 +110,7 @@ Version:        0.1
 	margin-right: -100%;
 	opacity: 0;
 	width: 100%;
-	z-index: 0
+	z-index: 1;
 }
 
 #featured-slider li a {
@@ -114,8 +118,8 @@ Version:        0.1
 }
 
 #featured-slider li {
-	-webkit-transition: opacity 1.5s, ,-webkit-transform 1.5s;  /* For Safari 3.1 to 6.0 */
-	transition: opacity 1.5s, transform 1.5s;
+	-webkit-transition: opacity 1.25s, ,-webkit-transform 1.25s;  /* For Safari 3.1 to 6.0 */
+	transition: opacity 1.25s, transform 1.25s;
 }
 
 #featured-slider #slider-background {
@@ -154,7 +158,7 @@ Version:        0.1
 	-ms-transition: all 1.25s ease;
 	-o-transition: all 1.25s ease;
 	transition: all 1.25s ease;
-	z-index: 1;
+	z-index: 2;
 }
 
 #featured-slider li img {
@@ -170,8 +174,6 @@ Version:        0.1
 }
 
 #course-summary {
-	/*background-color: rgba(255,255,255, .2);
-	background-color: #333333;*/
 	padding: 20px;
 }
 
@@ -191,11 +193,6 @@ Version:        0.1
 #course-description {
 	font-size: 14px;
 	margin: 12px 0;
-}
-
-#course-details {
-	/*background-color: rgba(255, 255, 255, 0.3);
-	background-color: #4D4D4D;*/
 }
 
 #course-details ul {
@@ -222,7 +219,6 @@ Version:        0.1
 	background: -ms-linear-gradient(top,  rgba(107,107,107,1) 0%,rgba(51,51,51,1) 3%,rgba(25,25,25,1) 100%); /* IE10+ */
 	background: linear-gradient(to bottom,  rgba(107,107,107,1) 0%,rgba(51,51,51,1) 3%,rgba(25,25,25,1) 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6b6b6b', endColorstr='#191919',GradientType=0 ); /* IE6-9 */
-
 	color: #fff;
 	font-size: 14px;
 	padding: 6px 8px;
@@ -307,47 +303,44 @@ Version:        0.1
 	margin-top: 40px;
 }
 
-#sub-top-content .two_third {
-	padding-right: 20px;
-} 
+#sub-top-content .entry-content .one_half:first-of-type {
+	padding-right: 40px;
+}
 
-#sub-top-content .one_third.last_column {
-	background-attachment: scroll, scroll;
-	background-blend-mode: unset;
-	background-color: rgba(0, 0, 0, 0.4);
+#sub-top-content .one_half:first-of-type em {
+  color: #ccc;
+}
+
+#sub-top-content .one_half.last_column {
 	background-color: #f8f8f8;
-	/*background-image: url("images/Summer-Beach-Sun-27.jpg"), none;*/
-	background-origin: padding-box, padding-box;
-	background-position: 0 0%, 0 0;
-	background-repeat: repeat, repeat;
-	background-size: 350px auto;
-	border-radius: 4px;
 	color: #000;
 }
 
-#sub-top-content .one_third.last_column h3 {
+#sub-top-content .one_half.last_column h3 {
 	background: none repeat scroll 0 0 #98c646;
-	border-radius: 4px 4px 0 0;
 	padding: 10px 20px;
 	margin: 0;
 }
 
-#sub-top-content .one_third.last_column h3:before {
+#sub-top-content .one_half.last_column h3:before {
 	content: "";
 	font: 23px/1 FontAwesome;
 	padding-right: 10px;
 }
 
-#sub-top-content .one_third.last_column p {
-	margin: 20px 20px;
+#sub-top-content .one_half.last_column p {
+	margin: 10px 20px;
 }
 
-#sub-top-content .one_third.last_column p:first-of-type {
-	border-bottom: 1px solid #ccc;
-	padding-bottom: 20px;
+#sub-top-content .one_half.last_column p:first-of-type {
+	margin-top: 20px;
 }
 
-#sub-top-content .one_third.last_column a {
+#sub-top-content .one_half.last_column p:last-of-type {
+	margin-bottom: 20px;
+}
+
+#sub-top-content .one_half.last_column a {
 	/*color: #ccc;*/
 }
 
