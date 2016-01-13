@@ -106,6 +106,7 @@ add_filter( 'image_resize_dimensions', 'rotate_resize', 10, 6 );
 
 /* Enqueue Scripts/Styles */
 function custom_js_script() {
+	wp_enqueue_style( 'bootstrap-grid', get_stylesheet_directory_uri() . '/css/bootstrap-grid.css' );
 	wp_enqueue_script('custom-script', get_stylesheet_directory_uri() . '/js/custom.js', array( 'jquery'), false, false);
 	wp_enqueue_script('jquery-effects-core');
 	wp_enqueue_script('jquery-effects-slide');
@@ -202,29 +203,31 @@ add_filter( 'pre_get_posts', 'add_custom_types_to_tax' );
 ** Create Custom Post from Gravity Form
 */
 
-add_action("gform_after_submission_1", "create_course_from_submission", 10, 2);
+add_action("gform_after_submission_2", "create_course_from_submission", 10, 2);
 function create_course_from_submission($entry, $form) {
 	//First need to create the post in its basic form
 	$new_course = array(
 		'post_title' => ($entry[1]),
 		'post_status' => 'draft',
 		'post_date' => date('Y-m-d H:i:s'),
-		'post_type' => 'cpt-courses'
+		'post_type' => 'cpt-courses',
+		'post_category' => array( 7 ),
 	);
 	//From creating it, we now have its ID
 	$post_id = wp_insert_post($new_course);
-	//Now we add the meta
-	//$thePrefix = '_sitemeta_';
-	// update_post_meta($theId, $thePrefix.'colour', ucwords($entry[1]));
-	// update_post_meta($theId, $thePrefix.'personality', ucwords($entry[2]));
-	// update_post_meta($theId, $thePrefix.'smell', ucwords($entry[3]));
+	//Now we add the meta / advanced custom fields
 	update_field('field_54bfbf110f93c', $entry['2'], $post_id); // Course # and Section
 	update_field('field_54bfbf9c0f93d', $entry['7'], $post_id); // Class #
 	update_field('field_54bfbff20f93e', $entry['6'], $post_id); // Number of credits
 	update_field('field_54bfc01c0f93f', $entry['4'], $post_id); // Instructor
-	update_field('field_54f0de30ac21e', $entry['5'], $post_id); // Start date
-	update_field('field_54f0de54ac21f', $entry['8'], $post_id); // End date
-	// Update post 37
+	
+	update_field('field_56952f9cec6d1', $entry['12'], $post_id); // UWM Email
+	update_field('field_569418de00e9d', $entry['14'], $post_id); // Course Dates
+	$start_end_dates = explode(' ', $entry['14'] );
+	update_field('field_54f0de30ac21e', $start_end_dates[0], $post_id); // Start date - needs YYYYMMDD format
+	update_field('field_54f0de54ac21f', $start_end_dates[1], $post_id); // End date - needs YYYYMMDD format
+	update_field('field_569417de6c0ca', $entry['15'], $post_id); // Course Level
+	// Update post
 	$my_post = array(
 	  'ID'           => $post_id,
 	  'post_content' => $entry['11']
@@ -232,23 +235,15 @@ function create_course_from_submission($entry, $form) {
 	// Update the post into the database
 	wp_update_post( $my_post );
 
-
-
 	if(!empty($entry['9'])) {
 		// $filename should be the path (not url) to a file in the upload directory.
 		$file_url = $entry['9']; //great but what is its url?
 		$upload_dir = wp_upload_dir(); // where is WordPress putting uploads?
 		//$base_name = basename($file_url); // name of the file
 		$gf_dir_begin = stristr($file_url, "gravity");
-		//$gf_dir_end = strrpos($gf_dir_begin, '/');
-		//$gf_dir = substr($gf_dir_begin, 0, $gf_dir_end);
 
 		$filename = $upload_dir['basedir'] . '/' . $gf_dir_begin;
 
-		// foreach ($_FILES as $uploaded_file => $value) {
-		// 	//print_r( $value['name'] );
-		// 	$filename = $upload_dir['basedir'] . '/' . $gf_dir . '/' . $value['name'];
-		// }
 
 		// Check the type of file. We'll use this as the 'post_mime_type'.
 		$filetype = wp_check_filetype( basename( $filename ), null );
@@ -271,7 +266,6 @@ function create_course_from_submission($entry, $form) {
 		// Make sure that this file is included, as wp_generate_attachment_metadata() depends on it.
 		require_once( ABSPATH . 'wp-admin/includes/image.php' );
 
-
 		// Generate the metadata for the attachment, and update the database record.
 		$attach_data = wp_generate_attachment_metadata( $attach_id, $filename );
 		wp_update_attachment_metadata( $attach_id, $attach_data );
@@ -281,17 +275,13 @@ function create_course_from_submission($entry, $form) {
 	}
 
 	//attach_pdf_to_post();
-	// echo '<pre>'; print_r($entry); echo '</pre>';
 	if(!empty($entry['10'])) {
 		$file_url = $entry['10']; //great but what is its url?
 		$upload_dir = wp_upload_dir(); // where is WordPress putting uploads?
 		$gf_dir_begin = stristr($file_url, "gravity");
 		$filename = $upload_dir['basedir'] . '/' . $gf_dir_begin;
-		// The ID of the post this attachment is for.
-		//$post_id = $post_id;
 		// Check the type of file. We'll use this as the 'post_mime_type'.
 		$filetype = wp_check_filetype( basename( $filename ), null );
-
 		// Get the path to the upload directory.
 		$wp_upload_dir = wp_upload_dir();
 
@@ -319,47 +309,3 @@ function create_course_from_submission($entry, $form) {
 		update_field('field_54f0eda5a8693', $attach_id, $post_id); // Course Syllabus
 	}
 }
-
-
-// add_action("gform_after_submission_1", "attach_pdf_to_post", 10, 2);
-// function attach_pdf_to_post($entry, $form) {
-	
-// }
-    
-    // // get the last image added to the post
-    // $attachments = get_posts(array('numberposts' => '1', 'post_parent' => $post_id, 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => 'ASC'));
-    
-    // if(sizeof($attachments) == 0)
-    //     return; //no images attached to the post
-
-    // // set image as the post thumbnail
-    // set_post_thumbnail($post_id, $attachments[0]->ID);
-	//set_post_thumbnail( $post_id, $entry['9'] );
-
-
-
-/* show plugins */
-// function showPlugins() {
-// 	// Check if get_plugins() function exists. This is required on the front end of the
-// 	// site, since it is in a file that is normally only loaded in the admin.
-// 	if ( ! function_exists( 'get_plugins' ) ) {
-// 		require_once ABSPATH . 'wp-admin/includes/plugin.php';
-// 	}
-
-// 	$all_plugins = get_plugins();
-// 	$all_plugins_keys = array_keys($all_plugins);
-
-// 	$loopCtr = 0;
-// 	echo "<table>";
-// 	foreach ($all_plugins as $plugin_item) {
-
-// 	     // Get our Plugin data variables
-// 	     $plugin_root_file   = $all_plugins_keys[$loopCtr];
-// 	     $plugin_title       = $plugin_item['Title'];
-// 	     $plugin_version     = $plugin_item['Version'];
-// 	     $plugin_status      = is_plugin_active($plugin_root_file) ? 'active' : 'inactive';
-// 		echo '<tr><td>' .$plugin_title . '</td><td>' . $plugin_version . '</td><td>' . $plugin_status .'</td></tr>';
-// 		$loopCtr++;
-// 	}
-// 	echo "</table>";
-// }
