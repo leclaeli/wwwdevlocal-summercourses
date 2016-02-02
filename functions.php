@@ -206,12 +206,13 @@ add_filter( 'pre_get_posts', 'add_custom_types_to_tax' );
 add_action("gform_after_submission_2", "create_course_from_submission", 10, 2);
 function create_course_from_submission($entry, $form) {
 	//First need to create the post in its basic form
+	$year_id = get_cat_id( '2016' ); // get the category id of the current year
 	$new_course = array(
 		'post_title' => ($entry[1]),
 		'post_status' => 'draft',
 		'post_date' => date('Y-m-d H:i:s'),
 		'post_type' => 'cpt-courses',
-		'post_category' => array( 7 ),
+		'post_category' => array( $year_id ),
 	);
 	//From creating it, we now have its ID
 	$post_id = wp_insert_post($new_course);
@@ -220,13 +221,13 @@ function create_course_from_submission($entry, $form) {
 	update_field('field_54bfbf9c0f93d', $entry['7'], $post_id); // Class #
 	update_field('field_54bfbff20f93e', $entry['6'], $post_id); // Number of credits
 	update_field('field_54bfc01c0f93f', $entry['4'], $post_id); // Instructor
-	
 	update_field('field_56952f9cec6d1', $entry['12'], $post_id); // UWM Email
 	update_field('field_569418de00e9d', $entry['14'], $post_id); // Course Dates
 	$start_end_dates = explode(' ', $entry['14'] );
 	update_field('field_54f0de30ac21e', $start_end_dates[0], $post_id); // Start date - needs YYYYMMDD format
 	update_field('field_54f0de54ac21f', $start_end_dates[1], $post_id); // End date - needs YYYYMMDD format
 	update_field('field_569417de6c0ca', $entry['15'], $post_id); // Course Level
+	update_field('field_56b0ec5b4ce0b', array($entry['16.1'], $entry['16.2'], $entry['16.3'], $entry['16.4'], $entry['16.5']), $post_id); // Meets Requirements
 	// Update post
 	$my_post = array(
 	  'ID'           => $post_id,
@@ -309,3 +310,22 @@ function create_course_from_submission($entry, $form) {
 		update_field('field_54f0eda5a8693', $attach_id, $post_id); // Course Syllabus
 	}
 }
+
+function send_email() {
+	// global $post_type;
+	// die( $post_type );
+	// if ( "cpt-courses" == $post_type ) {
+
+		$uwm_email = get_field( 'uwm_email' );
+		$to = $uwm_email;
+		$subject = "Course Published - UWM Summer Online Courses Website";
+		$body = "<p>Your course, [course title], is now available to view at [URL]. Please review this page for any inaccuracies and email Dylan Barth at djbarth@uwm.edu with corrections or questions.";
+		if (mail($to, $subject, $body)) {
+		echo("<p>Message successfully sent!</p>");
+		} else {
+		echo("<p>Message delivery failed...</p>");
+		}
+	// }
+}
+
+add_action('publish_cpt-courses','send_email');

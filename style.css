@@ -26,7 +26,9 @@ Version:        0.1
 #primary.site-content,
 #top-content,
 #sub-top-content,
-#courses-content {
+#courses-content,
+#courses-facets,
+.col-960 {
 	max-width: 960px;
 	margin: auto;
 	overflow: auto;
@@ -261,7 +263,7 @@ Version:        0.1
 	margin-right: 10px;
 }
 
-#previous:before {
+#previous::before {
 	content: "\f137";
 	font: 18px/1 FontAwesome;
 	padding-right: 8px;
@@ -303,78 +305,62 @@ Version:        0.1
 	margin-top: 40px;
 }
 
-#sub-top-content .entry-content .one_half:first-of-type {
+#sub-top-content .entry-content .three_fifth:first-of-type {
 	padding-right: 40px;
 }
 
-#sub-top-content .one_half:first-of-type em {
-  color: #ccc;
+#sub-top-content .three_fifth:first-of-type em {
+    color: #ccc;
 }
 
-#sub-top-content .one_half.last_column {
+.font-icons {
+    color: #ccc;
+    float: right;
+    padding-left: 30px;
+    width: 110px;
+}
+
+.fa-laptop::before,
+.fa-book::before {
+    font-size: 70px;
+}
+
+.fa.fa-laptop {
+    margin-bottom: 20px;
+}
+
+#sub-top-content .two_fifth.last_column {
 	background-color: #f8f8f8;
 	color: #000;
 }
 
-#sub-top-content .one_half.last_column h3 {
+#sub-top-content .two_fifth.last_column h3 {
 	background: none repeat scroll 0 0 #98c646;
 	padding: 10px 20px;
 	margin: 0;
 }
 
-#sub-top-content .one_half.last_column h3:before {
+#sub-top-content .two_fifth.last_column h3:before {
 	content: "";
 	font: 23px/1 FontAwesome;
 	padding-right: 10px;
 }
 
-#sub-top-content .one_half.last_column p {
+#sub-top-content .two_fifth.last_column p {
 	margin: 10px 20px;
 }
 
-#sub-top-content .one_half.last_column p:first-of-type {
+#sub-top-content .two_fifth.last_column p:first-of-type {
 	margin-top: 20px;
 }
 
-#sub-top-content .one_half.last_column p:last-of-type {
+#sub-top-content .two_fifth.last_column p:last-of-type {
 	margin-bottom: 20px;
 }
 
-#sub-top-content .one_half.last_column a {
+#sub-top-content .two_fifth.last_column a {
 	/*color: #ccc;*/
 }
-
-
-/*.sub-featured-course {
-	float: left;
-	width: 32%;
-	position: relative;
-	margin: 0 1%;
-}
-
-.sub-featured-course img {
-}
-
-.sub-featured-course:first-of-type {
-	margin: 0 1% 0 0;
-}
-
-.sub-featured-course:last-of-type {
-	margin: 0 0 0 1%;
-}
-
-.sub-featured-course h4 {
-	position: absolute;
-	bottom: 0;
-	padding: 10px 20px;
-	margin: 0;
-	background-color: rgba(0,0,0, .75);
-	width: 100%;
-	text-align: center;
-	color: #98c646;
-	font-weight: 400;
-	text-shadow: 1px 1px 0 rgba(0, 0, 0, 1);
-}*/
 
 /* courses container */
 
@@ -391,12 +377,117 @@ Version:        0.1
 
 }
 
+.col-960 {
+	margin-top: 40px;
+}
+
+#courses-container #courses-facets {
+	background: #f8f8f8;
+	padding: 20px;
+	border: 2px solid #ccc;
+	border-radius: 4px;
+}
+
+#courses-facets .facetwp-facet,
+#courses-facets .facetwp-facet .facetwp-search {
+	margin: 0;
+}
+
+.center-vertically {
+	display: flex;
+	align-items: center;
+}
+
+#courses-facets .col-sm-9 {
+	padding-left: 0;
+}
+
+.facetwp-facet input[type="search"] {
+	width: 100%;
+	border: 2px solid #ccc;
+}
+
+.reset-facets {
+	background-color: #ccc;
+    border-radius: 4px;
+    color: #7e8285;
+    display: none;
+    /*font-size: 0.8em;*/
+    /*margin-left: 20px;*/
+    padding: 6px 12px;
+    vertical-align: text-bottom;
+    background: #f8f8f8 none repeat scroll 0 0;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    /*float: right;*/
+    line-height: normal;
+    /*padding: 15px 20px;*/
+}
+
+#courses-facets .hidden {
+	display: none;
+}
+
+#courses-facets .filters-dropdown {
+	background: #f1f1f1 none repeat scroll 0 0;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    float: right;
+    padding: 15px 20px;
+    line-height: normal;
+}
+
+#courses-facets .filters-dropdown:hover,
+#courses-facets .hidden h4:hover {
+	cursor: pointer;
+}
+
+#courses-facets .filters-dropdown::after {
+	content: "\f078";
+	font: 16px/1 FontAwesome;
+    padding-left: 10px;
+}
+
+#courses-facets .filters-dropdown.open::after {
+	content: "\f077";
+}
+
+#courses-facets .hidden h4 {
+	text-align: center;
+	padding: 10px 20px;
+	background: #f1f1f1;
+	border: solid 2px #ccc;
+}
+
+#courses-facets .hidden h4:hover {
+	background: #f8f8f8;
+}
+
+#courses-facets .hidden .facetwp-facet {
+	display: none;
+}
+
+.facetwp-type-checkboxes {
+	height: auto;
+}
+
+.facetwp-checkbox {
+	font-size: 15px;
+}
+
 #courses-container #courses-content {
 	margin: 30px auto;
 }
 
+.filter-container .facetwp-facet {
+	border: 1px solid #ccc;
+	padding: 20px;
+	background: #fff;
+}
+
 #sub-top-container h2,
-#courses-content h2 {
+#courses-content h2,
+#browse {
 	margin-top: 0;
 	color: #98c646;
 	font-weight: 400;
@@ -470,6 +561,12 @@ Version:        0.1
 	color: #98c646;
 }
 
+#courses .unavailable {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
 .home #content {
 	background-color: rgba(77,77,77,1);
 }
@@ -512,6 +609,32 @@ Version:        0.1
 	font-size: 14px;
 }
 
+.scroll-to-bottom {
+	color: #ccc;
+	font-size: 12px;
+	text-align: center;
+}
+
+.loading,
+.done-loading {
+	display: none;
+	color: #ccc;
+	text-align: center;
+	margin-bottom: 40px;
+}
+
+.done-loading a {
+	color: #fff;
+	border-bottom: 1px #fff solid;
+}
+
+.done-loading a:hover {
+	text-decoration: none;
+	border-bottom: 2px #98c646 solid;
+}
+
+
+
 /*
 ** Sidebars & Widget Area
 */
@@ -530,66 +653,112 @@ Version:        0.1
 	padding: 14px 20px;
 }
 
-
-
-
-
-
-/*
-** Meta Slider
-*/
-
-/*#content-top .metaslider .caption-wrap {
-	position: relative;
+.home #tertiary .widget_1_of_3 {
+	float: none;
+	margin: 0 auto;
 	max-width: 960px;
-	margin: auto;
+	padding: 0 20px;
 }
 
-#content-top .metaslider .flex-direction-nav a {
-	background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
-	cursor: pointer;
-	display: block;
-	margin: 0;
-	opacity: 0.3;
-	position: absolute;
-	top: 42%;
-	z-index: 10;
+.home #tertiary .widget_1_of_3 .widget {
+    border-radius: 0px;
+    border: none;
+    padding: 0;
+    background-color: transparent;
 }
 
-#content-top .metaslider .flex-direction-nav .flex-prev {
-	border-bottom: 20px solid transparent;
-	border-right: 20px solid #fff;
-	border-top: 20px solid transparent;
-	left: 5%;
+
+.home #tertiary .widget_1_of_3 .widget a {
+	background-color: #333;
+    color: #ccc;
+    border-radius: 6px;
+    display: block;
+    font-size: 16px;
+    padding: 8px;
+    text-align: center;
+    background: rgb(107,107,107); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(107,107,107,1) 0%, rgba(51,51,51,1) 3%, rgba(25,25,25,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(107,107,107,1)), color-stop(3%,rgba(51,51,51,1)), color-stop(100%,rgba(25,25,25,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(107,107,107,1) 0%,rgba(51,51,51,1) 3%,rgba(25,25,25,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(107,107,107,1) 0%,rgba(51,51,51,1) 3%,rgba(25,25,25,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(107,107,107,1) 0%,rgba(51,51,51,1) 3%,rgba(25,25,25,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(107,107,107,0) 0%,rgba(51,51,51,1) 3%,rgba(25,25,25,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6b6b6b', endColorstr='#191919',GradientType=0 ); /* IE6-9 */
+	
 }
 
-#content-top .metaslider .flex-direction-nav .flex-next {
-  border-bottom: 20px solid transparent;
-  border-left: 20px solid #fff;
-  border-top: 20px solid transparent;
-  right: 5%;
+.home #tertiary .widget_1_of_3 .widget a:hover {
+	background: rgba(107,107,107,1);
+	background: -moz-linear-gradient(top, rgba(107,107,107,1) 0%, rgba(51,51,51,1) 3%, rgba(51,51,51,1) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(107,107,107,1)), color-stop(3%, rgba(51,51,51,1)), color-stop(100%, rgba(51,51,51,1)));
+	background: -webkit-linear-gradient(top, rgba(107,107,107,1) 0%, rgba(51,51,51,1) 3%, rgba(51,51,51,1) 100%);
+	background: -o-linear-gradient(top, rgba(107,107,107,1) 0%, rgba(51,51,51,1) 3%, rgba(51,51,51,1) 100%);
+	background: -ms-linear-gradient(top, rgba(107,107,107,1) 0%, rgba(51,51,51,1) 3%, rgba(51,51,51,1) 100%);
+	background: linear-gradient(to bottom, rgba(107,107,107,0) 0%, rgba(51,51,51,1) 3%, rgba(51,51,51,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6b6b6b', endColorstr='#333333', GradientType=0 );
+	color: #fff;
 }
 
-#content-top .metaslider .caption-wrap {
-	background: none repeat scroll 0 0 white;
-	border-radius: 5px;
-	bottom: 10%;
+.home #tertiary .widget_1_of_3 .widget a::after {
+	content: "\f08e";
+	font: 16px/1 FontAwesome;
+    padding-left: 10px;
+}
+
+/* From Simple CSS Plugin */
+/* Enter Your Custom CSS Here */
+#sub-top-content .entry-content .three_fifth:first-of-type {
+	padding-right: 40px;
+}
+
+#sub-top-content .three_fifth:first-of-type em {
+    color: #ccc;
+}
+
+.font-icons {
+    color: #ccc;
+    float: right;
+    padding-left: 30px;
+    width: 110px;
+}
+
+.fa-laptop::before,
+.fa-book::before {
+    font-size: 70px;
+}
+
+.fa.fa-laptop {
+    margin-bottom: 20px;
+}
+
+#sub-top-content .two_fifth.last_column {
+	background-color: #f8f8f8;
 	color: #000;
-	font-size: 14px;
-	left: auto;
-	line-height: 1.4em;
-	opacity: 0.9;
-	padding: 25px;
-	position: absolute;
-	left: 20%;
-	width: 420px;
-}*/
+}
 
-/* End Meta-Slider */
+#sub-top-content .two_fifth.last_column h3 {
+	background: none repeat scroll 0 0 #98c646;
+	padding: 10px 20px;
+	margin: 0;
+}
 
+#sub-top-content .two_fifth.last_column h3:before {
+	content: "";
+	font: 23px/1 FontAwesome;
+	padding-right: 10px;
+}
 
+#sub-top-content .two_fifth.last_column p {
+	margin: 10px 20px;
+}
 
+#sub-top-content .two_fifth.last_column p:first-of-type {
+	margin-top: 20px;
+}
 
+#sub-top-content .two_fifth.last_column p:last-of-type {
+	margin-bottom: 20px;
+}
 
 @media (max-width: 999px) {
 	#primary.site-content,

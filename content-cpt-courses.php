@@ -49,31 +49,35 @@
 			<?php 
 			echo '<ul><li><b>Class Number:</b> '; 
 			the_field( 'class_number' );
+			echo '</li><li><b>Course Level:</b> '; 
+			the_field( 'course_level' );
 			echo '</li><li><b>Credits:</b> '; 
 			the_field( 'number_of_credits' );
+			echo '</li><li><b>Meets Requirements:</b> '; 
+			the_field( 'meets_requirements' );
 			echo '</li><li><b>Instructor:</b> '; 
 			the_field( 'instructor' );
-			if( get_field('start_date') ):
-				echo '</li><li><b>Dates:</b> ';
-			/*
-			*  Create PHP DateTime object from Date Piker Value
-			*  this example expects the value to be saved in the format: yymmdd (JS) = Ymd (PHP)
-			*/
-				$date = DateTime::createFromFormat('Y-m-d', get_field('start_date'));
-				echo $date->format('m/d/y');
-				echo '–';
-				$date = DateTime::createFromFormat('Y-m-d', get_field('end_date'));
-				echo $date->format('m/d/y');
-			endif;
+			$course_dates = get_field( 'course_dates' );
+			$a = get_field_object('field_569418de00e9d');
+			echo '</li><li><b>Course Dates:</b> ';
+			echo $a['choices'][$course_dates];
+			// if( get_field('start_date') ):
+			// 	echo '</li><li><b>Dates:</b> ';
+			// /*
+			// *  Create PHP DateTime object from Date Piker Value
+			// *  this example expects the value to be saved in the format: yymmdd (JS) = Ymd (PHP)
+			// */
+			// 	$date = DateTime::createFromFormat('Y-m-d', get_field('start_date'));
+			// 	echo $date->format('m/d/y');
+			// 	echo '–';
+			// 	$date = DateTime::createFromFormat('Y-m-d', get_field('end_date'));
+			// 	echo $date->format('m/d/y');
+			// endif;
 			if( get_field('course_syllabus') ):
 				$file = get_field('course_syllabus');
 				echo "</li><li><a href='$file[url]' target='_blank'>Course Syllabus (.pdf)</a>";
 			endif;
 			echo '</li></ul>';
-			
-			// echo $file['url'];
-			// // view array of data
-			// var_dump($file);
 			?>
 
 			<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'twentythirteen' ) ); ?>

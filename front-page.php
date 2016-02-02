@@ -100,103 +100,96 @@ get_header(); ?>
     ?>
     </div> <!-- end top-containter -->
 
-        
-            <div id="sub-top-container" class="content-area">
-                <div id="sub-top-content">
-                    <div id="primary" class="site-content" role="main">
-                        <?php /* The loop */ ?>
-                        <?php while ( have_posts() ) : the_post(); ?>
-                        
-                            <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-                            
-                                <?php get_sidebar( 'front-page-banner' ); ?>
-                            
-                                <div class="entry-content">
-                                    
-                                    <?php wp_reset_query(); the_content(); ?>
-                                    
-                                </div><!-- .entry-content -->
+    <div id="sub-top-container" class="content-area">
 
-                            </article><!-- #post -->
-                            
-                        <?php endwhile; ?>
+        <div id="sub-top-content">
 
-                    </div><!-- #primary -->
-                </div>
-            </div>
+            <div id="primary" class="site-content" role="main">
+                
+                <?php /* The loop */ ?>
+                <?php while ( have_posts() ) : the_post(); ?>
+                
+                    <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+                    
+                        <?php get_sidebar( 'front-page-banner' ); ?>
+                    
+                        <div class="entry-content">
+                            <?php wp_reset_query(); the_content(); ?>
+                        </div><!-- .entry-content -->
 
+                    </article><!-- #post -->
+                    
+                <?php endwhile; ?>
 
-    <div id="courses-container" class="content-area">
-        <div id="courses-content">
-        <h2 id="browse">Browse Featured Courses</h2>
-        <?php
-            $args = array(
-                //Type & Status Parameters
-                'post_type'         => 'cpt-courses',
-                'posts_per_page'    => -1,
-                'order'             => 'ASC',
-                'orderby'           => 'name',
-            );
-            $the_query = new WP_Query( $args );
-            // The Loop
-            if ( $the_query->have_posts() ) { ?>
-            <?php $c = 0; ?>
-                <div id="courses">
-                    <ul>
-                    <?php while ( $the_query->have_posts() ) {
-                        $the_query->the_post();
-                        if ( $c == 4 ) {
-                            $c = 0;
-                        }
-                        $c++;
-                        if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned to it.
-                    ?>
-                    <?php 
-                        if ( $c == 1 ) {
-                            $col_class = "first-of-four";
-                        } else if ( $c == 4 ) {
-                            $col_class = "last-of-four";
-                        } else {
-                            $col_class = "middle";
-                        }
-                     ?> 
-                    <li id="<?php the_ID(); ?>" class="<?php echo $col_class; ?>">
-                        <a href='<?php the_permalink(); ?>'>
-                            <?php the_post_thumbnail('home_thumb'); ?>
-                            <div id="center-link">
-                                <i class="fa fa-link"></i>
-                                <p>Learn More</p>
-                            </div>
-                        </a>
-                            <div id="course-title"><a href='<?php the_permalink(); ?>'><?php the_title(); ?></a></div>
-                        
-                    </li>
-                    <?php
-                    }
-                    } ?>
-                    </ul>
-                </div>
-            <?php
-            } else {
-                // no posts found
-            }
-            /* Restore original Post Data */
-            wp_reset_postdata();
-            ?>
+            </div><!-- #primary -->
+
         </div>
+
     </div>
 
 
+    <div id="courses-container" class="content-area">
+       
+        <div class="col-960">
+            <h2 id="browse">Browse 2016 Featured Courses</h2>
+        </div>
+        
+        <div id="courses-facets" class="container">
 
-    
+            <!-- <h3>Search & Filter</h3> -->
+
+            <div class="row">
+
+                <div class="col-sm-6 center-vertically">
+                    <div class="col-sm-9">
+                        <?php echo facetwp_display( 'facet', 'search_facet' ); ?>
+                    </div>
+                    <div class="col-sm-3">
+                        <button onclick="FWP.reset()" class="reset-facets">Reset</button>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <span class="filters-dropdown">Filters</span>
+                </div>
+
+            </div>
+
+            <div class="row hidden">
+
+                <div class="col-sm-4 filter-container">
+                    <h4>Course Level</h4>
+                    <?php echo facetwp_display( 'facet', 'facet_course_level' ); ?>
+                </div>
+
+                <div class="col-sm-4 filter-container">
+                    <h4>Dates</h4>
+                    <?php echo facetwp_display( 'facet', 'date_facet' ); ?>
+                </div>
+
+                <div class="col-sm-4 filter-container">
+                    <h4>Meets Requirements</h4>
+                    <?php echo facetwp_display( 'facet', 'requirements_facet' ); ?>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="courses-content">
+            <?php echo facetwp_display( 'template', 'courses_filter' ); ?>
+        </div>
+        <div class="loading">
+            <i class="fa fa-spinner fa-spin fa-3x"></i>
+            <div>Loading Courses</div>
+        </div>
+        <div class="done-loading">
+            <span>All courses have been loaded. To narrow your results use the <a href="#courses-facets">search and filter bar</a>.</span>
+        </div>
+    </div>
     
     <div id="content" class="content-area">
-        
-        
-        
-        <?php get_sidebar( 'subsidiary' ); ?>
-        
+        <?php get_sidebar( 'subsidiary' ); ?> 
     </div><!-- #content -->
-    
     
 <?php get_footer(); ?>
