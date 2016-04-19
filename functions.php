@@ -311,21 +311,26 @@ function create_course_from_submission($entry, $form) {
 	}
 }
 
-function send_email() {
-	// global $post_type;
-	// die( $post_type );
-	// if ( "cpt-courses" == $post_type ) {
-
-		$uwm_email = get_field( 'uwm_email' );
-		$to = $uwm_email;
-		$subject = "Course Published - UWM Summer Online Courses Website";
-		$body = "<p>Your course, [course title], is now available to view at [URL]. Please review this page for any inaccuracies and email Dylan Barth at djbarth@uwm.edu with corrections or questions.";
-		if (mail($to, $subject, $body)) {
-		echo("<p>Message successfully sent!</p>");
-		} else {
-		echo("<p>Message delivery failed...</p>");
-		}
-	// }
+// send email to instructor when course is published from draft state. only fires when status is changed from draft to published.
+function on_publish_draft_post( $post ) {
+	$uwm_email = get_field( 'uwm_email' );
+	$instructor_name = "<p>Dear " . get_field( 'instructor' ) . ",</p>";
+	$course_title = get_the_title();
+	$course_permalink = get_permalink();
+	$course_link = "<a href='$course_permalink'>$course_permalink</a>";
+	$admin_email = "<a href='mailto:djbarth@uwm.edu'>djbarth@uwm.edu</a>";
+	$to = $uwm_email;
+	$headers  = 'MIME-Version: 1.0' . "\r\n";
+	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+	$headers .= 'From: UWM Online Summer Courses <djbarth@uwm.edu>' . "\r\n";
+	$headers .= 'Bcc: eleclair@uwm.edu' . "\r\n";
+	$subject = "Course Published - UWM Online Summer Courses Website";
+	$body = "$instructor_name<p>Your course, $course_title, is now available to view at $course_link. \r\n
+	Please review this page for any inaccuracies and email Dylan Barth at $admin_email with corrections or questions.<p>Thank you!</p>";
+	if (mail($to, $subject, $body, $headers)) {
+	echo("<p>Message successfully sent!</p>");
+	} else {
+	echo("<p>Message delivery failed...</p>");
+	}
 }
-
-add_action('publish_cpt-courses','send_email');
+add_action(  'draft_to_publish',  'on_publish_draft_post', 10, 1 );

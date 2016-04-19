@@ -18,6 +18,12 @@ Version:        0.1
 
 /* Top content */
 
+body {
+	-webkit-font-smoothing: antialiased;
+	font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
 .home .content-area {
 	max-width: 100%;
 	padding: 0;
@@ -28,6 +34,7 @@ Version:        0.1
 #sub-top-content,
 #courses-content,
 #courses-facets,
+#full-courses,
 .col-960 {
 	max-width: 960px;
 	margin: auto;
@@ -402,9 +409,15 @@ Version:        0.1
 	padding-left: 0;
 }
 
-.facetwp-facet input[type="search"] {
+.facetwp-facet .facetwp-search {
 	width: 100%;
 	border: 2px solid #ccc;
+	padding: 15px 20px;
+	border-radius: 4px;
+}
+
+.facetwp-btn::before {
+	margin-right: 10px;
 }
 
 .reset-facets {
@@ -435,6 +448,7 @@ Version:        0.1
     float: right;
     padding: 15px 20px;
     line-height: normal;
+    display: inline-block;
 }
 
 #courses-facets .filters-dropdown:hover,
@@ -487,7 +501,7 @@ Version:        0.1
 
 #sub-top-container h2,
 #courses-content h2,
-#browse {
+.browse {
 	margin-top: 0;
 	color: #98c646;
 	font-weight: 400;
@@ -533,6 +547,54 @@ Version:        0.1
 	-ms-transition: all .25s ease;
 	-o-transition: all .25s ease;
 	transition: all .25s ease;
+}
+
+.class-full {
+	position: absolute;
+	top: 180px;
+	right: 0px;
+	padding: 4px 8px;
+	background-color: rgba(0,0,0,.8);
+	color: red;
+	text-transform: uppercase;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+#course-summary .class-full {
+	position: static;
+	padding: 0;
+	margin-top: 12px;
+}
+
+.single .class-full {
+	position: relative;
+	background: #f2dede;
+	color: #a94442;
+	top: initial;
+	right: initial;
+	border: 1px #ebccd1 solid;
+	border-radius: 4px;
+	text-transform: initial;
+	padding: 15px;
+	font-size: 16px;
+}
+
+.close {
+	color: #000;
+	float: right;
+	font-size: 21px;
+	font-weight: 700;
+	line-height: 1;
+	opacity: 0.2;
+	text-shadow: 0 1px 0 #fff;
+}
+
+.close:focus, .close:hover {
+	color: #000;
+	cursor: pointer;
+	opacity: 0.5;
+	text-decoration: none;
 }
 
 #center-link {

@@ -26,6 +26,12 @@
         <?php //if ( $start_date > $cutoff_date ) : ?>
             <!-- <div class="unavailable">Registration Closed: <?php //echo $start_date . ' ' . $current_date; ?></div> -->
         <?php //endif; ?>
+        <?php 
+            // class is full
+            // if ( has_category( 'class-full' ) ) : ?>
+                <!-- <div class="class-full">Class Full</div> -->
+        <?php // endif ?>   
+         
         <a href='<?php the_permalink(); ?>'>
             <?php if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned to it.
                 the_post_thumbnail('home_thumb'); 

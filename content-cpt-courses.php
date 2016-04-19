@@ -43,7 +43,16 @@
 			<?php the_excerpt(); ?>
 		</div><!-- .entry-summary -->
 	<?php else : ?>
+
 		<div class="entry-content">
+
+			<?php if ( has_category( 'class-full' ) ) : ?>
+	            <div class="class-full alert">
+	            	<a title="close" aria-label="close" data-dismiss="alert" class="close" href="#">×</a>
+	            	<span>This class is full.</span>
+	            </div>
+		    <?php endif ?>
+
 			<h4><?php the_field( 'course_number_section' ); ?></h4>
 			
 			<?php 
